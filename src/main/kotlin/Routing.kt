@@ -17,6 +17,17 @@ import io.ktor.server.sessions.*
 
 fun Application.configureRouting() {
     routing {
+        staticResources("static", "static")
+        get("/tasks") {
+            call.respond(
+                listOf<Task>(
+                    Task("cleaning", "Clean the house", Priority.Low),
+                    Task("gardening", "Mow the lawn", Priority.Medium),
+                    Task("shopping", "Buy the groceries", Priority.High),
+                    Task("painting", "Paint the fence", Priority.Medium)
+                )
+            )
+        }
         get("/") {
             call.respondText("Hello World!")
         }
